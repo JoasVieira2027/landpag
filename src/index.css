@@ -1,0 +1,196 @@
+/* ==============================================================================
+   DESIGN SYSTEM - FLUXOWEB  (DARK EDITION — Electric Blue)
+   Redesign total: dark, minimal, fluido, inspirado no aesthetic da imagem.
+   ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* ── Core Dark Palette ── */
+  --bg-root:       #07070a;
+  --bg-surface:    #0d0d14;
+  --bg-card:       rgba(255,255,255,0.04);
+  --bg-card-hover: rgba(255,255,255,0.07);
+
+  --border-subtle: rgba(255,255,255,0.07);
+  --border-medium: rgba(255,255,255,0.12);
+  --border-glow:   rgba(0,102,255,0.45);
+
+  --text-primary:   #f0f0ff;
+  --text-secondary: #a0a0c0;
+  --text-muted:     #5a5a7a;
+  --text-inverse:   #07070a;
+
+  /* ── Electric Blue Accent ── */
+  --accent:        #0066FF;
+  --accent-light:  #60a5fa;
+  --accent-dark:   #0052CC;
+  --accent-glow:   rgba(0,102,255,0.38);
+  --accent-glow-lg: rgba(0,102,255,0.18);
+
+  /* ── Green WhatsApp ── */
+  --wa-green: #25d366;
+  --wa-green-dark: #1da851;
+
+  /* ── Typography ── */
+  --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-body:    'Inter', -apple-system, sans-serif;
+
+  /* ── Radius ── */
+  --r-sm:   8px;
+  --r-md:   14px;
+  --r-lg:   20px;
+  --r-xl:   28px;
+  --r-full: 9999px;
+
+  /* ── Transitions ── */
+  --t-fast:   0.18s ease;
+  --t-normal: 0.28s ease;
+  --t-spring: 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-root);
+  color: var(--text-primary);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+p { color: var(--text-secondary); }
+
+a { color: inherit; text-decoration: none; }
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; font-size: inherit; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* ── Container ── */
+.container {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+@media (min-width: 768px) { .container { padding: 0 2.5rem; } }
+
+/* ── Section ── */
+.section { padding: 6rem 0; position: relative; }
+@media (min-width: 992px) { .section { padding: 8rem 0; } }
+
+/* ── Global Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes aurora {
+  0%   { transform: translate(-50%,-50%) rotate(0deg) scale(1); }
+  50%  { transform: translate(-50%,-50%) rotate(180deg) scale(1.15); }
+  100% { transform: translate(-50%,-50%) rotate(360deg) scale(1); }
+}
+
+@keyframes waPulse {
+  0%,100% { box-shadow: 0 6px 24px rgba(37,211,102,.45), 0 0 0 0 rgba(37,211,102,.4); }
+  50%      { box-shadow: 0 6px 24px rgba(37,211,102,.45), 0 0 0 10px rgba(37,211,102,0); }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--r-full);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  font-family: var(--font-heading);
+  transition: all var(--t-fast);
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-lg { padding: 1rem 2rem; font-size: 1rem; }
+
+/* Electric Blue primary */
+.btn-violet {
+  background: linear-gradient(135deg, #0066FF 0%, #0052CC 100%);
+  color: #fff;
+  border: 1px solid rgba(0,102,255,0.4);
+  box-shadow: 0 4px 20px rgba(0,102,255,0.38);
+}
+.btn-violet:hover {
+  background: linear-gradient(135deg, #338aff 0%, #0066FF 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,102,255,0.55);
+  color: #fff;
+}
+
+/* Ghost */
+.btn-ghost {
+  background: rgba(255,255,255,0.06);
+  color: var(--text-primary);
+  border: 1px solid var(--border-medium);
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.22);
+  transform: translateY(-1px);
+}
+
+/* WhatsApp */
+.btn-wa {
+  background: #25d366;
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+}
+.btn-wa:hover {
+  background: #1da851;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37,211,102,0.45);
+  color: #fff;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-root); }
+::-webkit-scrollbar-thumb { background: #2a2a40; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3d3d5c; }

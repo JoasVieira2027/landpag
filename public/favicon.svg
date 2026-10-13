@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background rounded square -->
+  <rect width="32" height="32" rx="8" fill="#0066FF"/>
+  <!-- F letter representing FluxoWeb flow -->
+  <path d="M8 8h12v3H11v4h8v3h-8v7H8V8z" fill="white"/>
+  <!-- W accent dot / flow indicator -->
+  <circle cx="23" cy="22" r="3.5" fill="#93c5fd"/>
+  <!-- Flow line accent -->
+  <path d="M20 18 Q22 16 25 18" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>
