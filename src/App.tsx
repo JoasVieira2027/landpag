@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 import { SiteProvider } from './context/SiteContext';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';

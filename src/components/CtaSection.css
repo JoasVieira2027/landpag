@@ -1,12 +1,24 @@
 /* =============================================
-   CTA SECTION — Dark Final
+   CTA SECTION — Light Navy Final
    ============================================= */
 
 .cta-section {
   position: relative;
   padding: 7rem 0;
-  background: #07070a;
+  background: var(--navy);
   overflow: hidden;
+}
+
+/* Subtle pattern overlay */
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
 }
 
 .cta-inner {
@@ -16,13 +28,13 @@
   margin: 0 auto;
 }
 
-/* Aurora glow behind */
+/* Light accent glow behind */
 .cta-aurora {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   width: 600px; height: 400px;
-  background: radial-gradient(ellipse, rgba(0,102,255,0.18) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(59,130,246,0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -32,25 +44,26 @@
 }
 
 .cta-eyebrow {
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #60a5fa;
+  color: #93c5fd;
   margin-bottom: 1.25rem;
 }
 
 .cta-title {
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: 900;
-  color: #f0f0ff;
+  color: #ffffff;
   letter-spacing: -0.03em;
   line-height: 1.15;
   margin-bottom: 1.25rem;
 }
 
 .cta-title-grad {
-  background: linear-gradient(90deg, #60a5fa 0%, #0066FF 60%, #93c5fd 100%);
+  color: #60a5fa;
+  background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 50%, #3b82f6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -58,9 +71,9 @@
 
 .cta-desc {
   font-size: 1.05rem;
-  color: #60608a;
+  color: rgba(255,255,255,0.6);
   margin-bottom: 2.5rem;
-  line-height: 1.6;
+  line-height: 1.65;
 }
 
 .cta-btn {
@@ -72,8 +85,8 @@
   border-radius: 999px;
   font-size: 1rem;
   font-weight: 700;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background: #25d366;
+  font-family: var(--font-heading);
+  background: var(--wa-green);
   color: #fff;
   text-decoration: none;
   box-shadow: 0 6px 28px rgba(37,211,102,0.35);
@@ -81,7 +94,7 @@
 }
 
 .cta-btn:hover {
-  background: #1da851;
+  background: var(--wa-green-dark);
   transform: translateY(-3px);
   box-shadow: 0 12px 36px rgba(37,211,102,0.5);
   color: #fff;
