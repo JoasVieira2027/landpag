@@ -4,14 +4,20 @@
 
 .services-section {
   position: relative;
-  padding: 6.5rem 0 6rem;
+  padding: 4.5rem 0 4rem;
   background-color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .services-section {
+    padding: 6.5rem 0 6rem;
+  }
 }
 
 .services-container {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3.5rem;
+  gap: 2.25rem;
   align-items: flex-start;
 }
 
@@ -26,8 +32,14 @@
 .services-intro {
   display: flex;
   flex-direction: column;
-  position: sticky;
-  top: 6rem;
+  position: static;
+}
+
+@media (min-width: 992px) {
+  .services-intro {
+    position: sticky;
+    top: 6rem;
+  }
 }
 
 .services-kicker {
