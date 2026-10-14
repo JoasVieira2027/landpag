@@ -14,13 +14,19 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenQuoteModal }) => {
   const [iframeLoaded, setIframeLoaded] = useState(false);
 
   const getTagBadge = (proj: ProjectItem) => {
-    if (proj.id === 'acai-daiane') return 'Açaiteria';
-    if (proj.id === 'barbearia') return 'Barbearia';
     if (proj.id === 'fit-vibe-activewear') return 'Loja de Roupas';
-    if (proj.category === 'pedidos') return 'Cardápios & Pedidos';
-    if (proj.category === 'agendamentos') return 'Agendamentos';
+    if (proj.id === 'acai-daiane') return 'Açaiteria & Delivery';
+    if (proj.id === 'painel-admin-acai') return 'Painel Administrativo';
     if (proj.category === 'lojas') return 'Loja & Catálogo';
+    if (proj.category === 'pedidos') return 'Cardápios & Pedidos';
+    if (proj.category === 'sistemas') return 'Painel de Gestão';
     return 'Site Profissional';
+  };
+
+  const getDisplayUrl = (proj: ProjectItem) => {
+    if (proj.id === 'fit-vibe-activewear') return 'sitederoupa-6efo.vercel.app';
+    if (proj.id === 'painel-admin-acai') return 'acaidadaiane.vercel.app/admin';
+    return 'acaidadaiane.vercel.app';
   };
 
   const handleOpenModal = (project: ProjectItem) => {
@@ -45,8 +51,8 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenQuoteModal }) => {
               <span className="portfolio-title-blue">vendas.</span>
             </h2>
             <p className="portfolio-subtitle">
-              Confira alguns dos sites que já desenvolvemos para negócios como açaiterias,
-              barbearias e lojas de roupas. Cada projeto é feito sob medida para a sua necessidade.
+              Confira os sites reais desenvolvidos para nossos clientes: loja de roupas com pedidos,
+              cardápio digital de açaí e painel de gestão da operação em tempo real.
             </p>
           </div>
 
@@ -58,7 +64,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenQuoteModal }) => {
           </div>
         </div>
 
-        {/* ── 3 Project Cards Grid (Reference Style) ── */}
+        {/* ── 3 Real Project Cards Grid ── */}
         <div className="portfolio-cards-grid">
           {projects.map((project) => (
             <article
@@ -66,14 +72,24 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenQuoteModal }) => {
               className="portfolio-agency-card"
               onClick={() => handleOpenModal(project)}
             >
-              {/* Device Image Box */}
+              {/* Browser Mockup Header & Image Box */}
               <div className="portfolio-agency-media">
-                <img
-                  src={project.image}
-                  alt={t(project.title)}
-                  className="portfolio-agency-img"
-                  loading="lazy"
-                />
+                <div className="portfolio-browser-mockup-bar">
+                  <div className="browser-dots">
+                    <span /><span /><span />
+                  </div>
+                  <span className="browser-mockup-url">{getDisplayUrl(project)}</span>
+                </div>
+
+                <div className="portfolio-agency-img-wrap">
+                  <img
+                    src={project.image}
+                    alt={t(project.title)}
+                    className="portfolio-agency-img"
+                    loading="lazy"
+                  />
+                </div>
+
                 <div className="portfolio-card-hover-overlay">
                   <span className="hover-view-btn">
                     <Monitor size={16} />
@@ -155,7 +171,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenQuoteModal }) => {
             </div>
 
             <div className="portfolio-modal-body">
-              {selectedProject.liveUrl ? (
+              {selectedProject.liveUrl && selectedProject.id !== 'painel-admin-acai' ? (
                 <div className="modal-live-preview-wrapper">
                   <div className="modal-browser-chrome">
                     <div className="modal-browser-bar">
@@ -186,11 +202,24 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenQuoteModal }) => {
                   </div>
                 </div>
               ) : (
-                <img
-                  src={selectedProject.image}
-                  alt={t(selectedProject.title)}
-                  className="modal-project-img"
-                />
+                <div className="modal-live-preview-wrapper">
+                  <div className="modal-browser-chrome">
+                    <div className="modal-browser-bar">
+                      <div className="browser-dots">
+                        <span /><span /><span />
+                      </div>
+                      <div className="modal-browser-address">
+                        <Globe size={13} />
+                        <span>{getDisplayUrl(selectedProject)}</span>
+                      </div>
+                    </div>
+                    <img
+                      src={selectedProject.image}
+                      alt={t(selectedProject.title)}
+                      className="modal-project-img"
+                    />
+                  </div>
+                </div>
               )}
 
               <p className="modal-project-desc">{t(selectedProject.shortDesc)}</p>

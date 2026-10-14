@@ -78,9 +78,9 @@ export const defaultSettings: SiteSettings = {
       es: '¡Hola! Quiero iniciar mi sitio/landing page agora. ¿Cómo procedemos?'
     },
     email: 'contatojoasvieira@gmail.com',
-    instagram: 'https://instagram.com/fluxoweb',
-    linkedin: 'https://linkedin.com/company/fluxoweb',
-    github: 'https://github.com/fluxoweb',
+    instagram: '',
+    linkedin: '',
+    github: '',
     location: {
       pt: 'Recife, PE - Atendimento para Todo o Brasil',
       en: 'Recife, Brazil - Serving Clients Globally',
@@ -416,6 +416,29 @@ export const defaultDifferentials: DifferentialItem[] = [
 
 export const defaultProjects: ProjectItem[] = [
   {
+    id: 'fit-vibe-activewear',
+    title: {
+      pt: 'Fit Vibe Activewear',
+      en: 'Fit Vibe Activewear — Fashion & Fitness Store',
+      es: 'Fit Vibe Activewear — Tienda y Catálogo de Ropa'
+    },
+    category: 'lojas',
+    shortDesc: {
+      pt: 'Loja e catálogo com pedidos pelo WhatsApp',
+      en: 'Online catalog and store with WhatsApp orders',
+      es: 'Catálogo de indumentaria y pedidos directos por WhatsApp'
+    },
+    image: '/projects/site-roupa-real.png',
+    featured: true,
+    liveUrl: 'https://sitederoupa-6efo.vercel.app/',
+    technologies: ['Catálogo de Roupas', 'Carrinho Interativo', 'Cálculo de Frete', 'Checkout no WhatsApp'],
+    results: {
+      pt: 'Aumento expressivo nas conversões diárias e pedidos recebidos prontos no WhatsApp da loja.',
+      en: 'Remarkable increase in daily sales and structured orders received on WhatsApp.',
+      es: 'Aumento notable en conversiones y pedidos directos recibidos por WhatsApp.'
+    }
+  },
+  {
     id: 'acai-daiane',
     title: {
       pt: 'Açaí da Daiane',
@@ -428,7 +451,7 @@ export const defaultProjects: ProjectItem[] = [
       en: 'Website with digital menu and WhatsApp order checkout',
       es: 'Sitio con menú digital y pedidos por WhatsApp'
     },
-    image: '/projects/acai-daiane.jpg',
+    image: '/projects/site-acai-real.png',
     featured: true,
     liveUrl: 'https://acaidadaiane.vercel.app/',
     technologies: ['Cardápio Digital', 'Cálculo de Entrega', 'Adicionais & Tamanhos', 'Checkout no WhatsApp'],
@@ -439,49 +462,26 @@ export const defaultProjects: ProjectItem[] = [
     }
   },
   {
-    id: 'barbearia',
+    id: 'painel-admin-acai',
     title: {
-      pt: 'Agende seu horário',
-      en: 'Book Your Appointment — Premium Barbershop',
-      es: 'Agende su Turno — Barbería Premium'
+      pt: 'Painel Admin do Açaí',
+      en: 'Operations Admin Dashboard — Açaí Shop',
+      es: 'Panel de Administración — Açaí Shop'
     },
-    category: 'agendamentos',
+    category: 'sistemas',
     shortDesc: {
-      pt: 'Site com agendamento online',
-      en: 'Website with online booking system and client schedule',
-      es: 'Sitio web con sistema de reservas online'
+      pt: 'Visão geral da operação e pedidos em tempo real',
+      en: 'Real-time order management, revenue tracking and store status',
+      es: 'Gestión de pedidos en tiempo real y administración del menú'
     },
-    image: '/projects/barbearia.jpg',
+    image: '/projects/painel-admin-real.png',
     featured: true,
     liveUrl: 'https://acaidadaiane.vercel.app/',
-    technologies: ['Agendamento Online', 'Escolha de Barbeiro', 'Horários Livres', 'Confirmação via WhatsApp'],
+    technologies: ['Gestão de Pedidos', 'Abertura/Fechamento de Loja', 'Faturamento em Tempo Real', 'Painel Intuitivo'],
     results: {
-      pt: 'Economia de mais de 3 horas diárias de atendimento manual para marcar clientes.',
-      en: 'Saves over 3 hours daily in manual client messaging and scheduling.',
-      es: 'Ahorro de más de 3 horas diarias en agendamiento manual.'
-    }
-  },
-  {
-    id: 'fit-vibe-activewear',
-    title: {
-      pt: 'Coleção 2026',
-      en: 'Collection 2026 — Fit Vibe Activewear',
-      es: 'Colección 2026 — Fit Vibe Activewear'
-    },
-    category: 'lojas',
-    shortDesc: {
-      pt: 'Catálogo e pedidos pelo WhatsApp',
-      en: 'Product catalog and direct WhatsApp orders',
-      es: 'Catálogo de indumentaria y pedidos directos por WhatsApp'
-    },
-    image: '/projects/colecao-moda.jpg',
-    featured: true,
-    liveUrl: 'https://sitederoupa-6efo.vercel.app/',
-    technologies: ['Catálogo de Roupas', 'Carrinho Interativo', 'Cálculo de Frete', 'Checkout no WhatsApp'],
-    results: {
-      pt: 'Aumento expressivo nas conversões diárias e pedidos recebidos prontos no WhatsApp da loja.',
-      en: 'Remarkable increase in daily sales and structured orders received on WhatsApp.',
-      es: 'Aumento notable en conversiones y pedidos directos recibidos por WhatsApp.'
+      pt: 'Controle total da operação diária pelo celular ou computador sem complicações.',
+      en: 'Total daily operations control from mobile or desktop with zero hassle.',
+      es: 'Control total de la operación diaria desde el celular o computadora.'
     }
   }
 ];
