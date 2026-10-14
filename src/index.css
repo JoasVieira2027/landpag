@@ -19,18 +19,24 @@
   /* ── Text ── */
   --text-primary:   #0f1729;
   --text-secondary: #4a5568;
+  --text-tertiary:  #64748b;
   --text-muted:     #8896b0;
   --text-inverse:   #ffffff;
 
   /* ── Navy Blue Accent ── */
-  --accent:        #1e40af;
+  --accent:        #1d4ed8;
   --accent-light:  #3b82f6;
   --accent-mid:    #2563eb;
   --accent-dark:   #1e3a8a;
   --accent-pale:   #eff6ff;
 
+  --blue-primary:   #1d4ed8;
+  --blue-secondary: #3b82f6;
+  --blue-dark:      #1e3a8a;
+  --blue-light:     #eff6ff;
+
   /* ── Navy Dark ── */
-  --navy:          #0f1729;
+  --navy:          #0b192c;
   --navy-light:    #1e2d4a;
 
   /* ── Green WhatsApp ── */

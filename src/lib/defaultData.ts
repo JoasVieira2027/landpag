@@ -416,19 +416,65 @@ export const defaultDifferentials: DifferentialItem[] = [
 
 export const defaultProjects: ProjectItem[] = [
   {
+    id: 'acai-daiane',
+    title: {
+      pt: 'Açaí da Daiane',
+      en: 'Açaí da Daiane — Digital Menu & WhatsApp Orders',
+      es: 'Açaí da Daiane — Menú Digital y Pedidos WhatsApp'
+    },
+    category: 'pedidos',
+    shortDesc: {
+      pt: 'Site com cardápio e pedidos pelo WhatsApp',
+      en: 'Website with digital menu and WhatsApp order checkout',
+      es: 'Sitio con menú digital y pedidos por WhatsApp'
+    },
+    image: '/projects/acai-daiane.jpg',
+    featured: true,
+    liveUrl: 'https://acaidadaiane.vercel.app/',
+    technologies: ['Cardápio Digital', 'Cálculo de Entrega', 'Adicionais & Tamanhos', 'Checkout no WhatsApp'],
+    results: {
+      pt: 'Mais de 150 pedidos processados por semana direto no WhatsApp do estabelecimento.',
+      en: 'Over 150 weekly orders processed directly in the business WhatsApp.',
+      es: 'Más de 150 pedidos semanales recibidos directamente por WhatsApp.'
+    }
+  },
+  {
+    id: 'barbearia',
+    title: {
+      pt: 'Agende seu horário',
+      en: 'Book Your Appointment — Premium Barbershop',
+      es: 'Agende su Turno — Barbería Premium'
+    },
+    category: 'agendamentos',
+    shortDesc: {
+      pt: 'Site com agendamento online',
+      en: 'Website with online booking system and client schedule',
+      es: 'Sitio web con sistema de reservas online'
+    },
+    image: '/projects/barbearia.jpg',
+    featured: true,
+    liveUrl: 'https://acaidadaiane.vercel.app/',
+    technologies: ['Agendamento Online', 'Escolha de Barbeiro', 'Horários Livres', 'Confirmação via WhatsApp'],
+    results: {
+      pt: 'Economia de mais de 3 horas diárias de atendimento manual para marcar clientes.',
+      en: 'Saves over 3 hours daily in manual client messaging and scheduling.',
+      es: 'Ahorro de más de 3 horas diarias en agendamiento manual.'
+    }
+  },
+  {
     id: 'fit-vibe-activewear',
     title: {
-      pt: 'Fit Vibe Activewear — Loja & Catálogo de Roupas',
-      en: 'Fit Vibe Activewear — Fashion & Fitness Store',
-      es: 'Fit Vibe Activewear — Tienda y Catálogo de Ropa'
+      pt: 'Coleção 2026',
+      en: 'Collection 2026 — Fit Vibe Activewear',
+      es: 'Colección 2026 — Fit Vibe Activewear'
     },
     category: 'lojas',
     shortDesc: {
-      pt: 'Loja virtual e catálogo moderno para marca de roupas fitness, com vitrine de produtos, cálculo de frete, carrinho interativo e pedidos finalizados diretamente no WhatsApp.',
-      en: 'Modern online store and catalog for activewear brand, featuring product showcase, shipping calculation, interactive cart, and direct WhatsApp checkout.',
-      es: 'Tienda virtual y catálogo moderno para marca de indumentaria fitness, con vitrina de productos, cálculo de envío y pedidos directos por WhatsApp.'
+      pt: 'Catálogo e pedidos pelo WhatsApp',
+      en: 'Product catalog and direct WhatsApp orders',
+      es: 'Catálogo de indumentaria y pedidos directos por WhatsApp'
     },
-    image: '/projects/fit-vibe-activewear.jpg',
+    image: '/projects/colecao-moda.jpg',
     featured: true,
     liveUrl: 'https://sitederoupa-6efo.vercel.app/',
     technologies: ['Catálogo de Roupas', 'Carrinho Interativo', 'Cálculo de Frete', 'Checkout no WhatsApp'],

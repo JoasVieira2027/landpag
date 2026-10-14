@@ -3,6 +3,8 @@ import './App.css';
 import { SiteProvider } from './context/SiteContext';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { Portfolio } from './components/Portfolio';
+import { Services } from './components/Services';
 import { Plans } from './components/Plans';
 import { CtaSection } from './components/CtaSection';
 import { Footer } from './components/Footer';
@@ -30,7 +32,9 @@ const MainAppContent: React.FC = () => {
 
       <main id="main-content">
         <Hero onOpenQuoteModal={() => handleOpenQuoteModal()} />
-        <Plans />
+        <Portfolio onOpenQuoteModal={() => handleOpenQuoteModal()} />
+        <Services onSelectServiceForQuote={(title) => handleOpenQuoteModal(title)} />
+        <Plans onOpenQuoteModal={() => handleOpenQuoteModal()} />
         <CtaSection onOpenQuoteModal={() => handleOpenQuoteModal()} />
       </main>
 

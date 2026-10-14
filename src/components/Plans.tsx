@@ -1,297 +1,154 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { useSite } from '../context/SiteContext';
-import { CheckCircle2, ArrowRight, Zap, LayoutDashboard, ChevronDown, Sparkles, Clock, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, MessageSquare, ArrowRight } from 'lucide-react';
 import './Plans.css';
 
-interface PlanDetailSection {
-  title: string;
-  items: string[];
+interface PlansProps {
+  onOpenQuoteModal?: () => void;
 }
 
-interface Plan {
+interface PlanItem {
   id: string;
-  icon: React.ReactNode;
-  eyebrow: string;
   name: string;
+  tagline: string;
+  badge?: string;
   price: string;
-  priceSub: string;
+  period: string;
   features: string[];
-  note: string;
-  waMsg: string;
-  cta: string;
   featured: boolean;
-  detailedInfo: {
-    prazo: string;
-    destaque: string;
-    sections: PlanDetailSection[];
-  };
+  waMsg: string;
+  ctaText: string;
 }
 
-const PLANS: Plan[] = [
+const AGENCY_PLANS: PlanItem[] = [
   {
-    id: 'landing',
-    icon: <Zap size={22} strokeWidth={1.8} />,
-    eyebrow: 'Pagamento Único',
+    id: 'landing-page',
     name: 'Landing Page',
-    price: 'Valor Único',
-    priceSub: 'Sem mensalidade. Após a entrega, alterações futuras custam entre R$ 50 a R$ 100 conforme o ajuste.',
+    tagline: 'Site de alta conversão',
+    price: 'R$ 297',
+    period: 'Valor único',
     features: [
-      'Layout moderno focado em conversão',
-      '100% responsivo (Mobile, iPad e Desktop)',
-      'Botões de WhatsApp estratégicos',
-      'Carregamento ultra rápido',
-      'SEO configurado para buscas no Google',
-      'Entrega rápida em até 7 dias úteis',
-      'Alterações pós-entrega: R$ 50 a R$ 100 por ajuste',
+      'Página moderna e responsiva',
+      'Botão para WhatsApp',
+      'Formulário de contato',
+      'Painel de edição'
     ],
-    note: '⚠️ Após entrega e aprovação, qualquer alteração futura será cobrada à parte entre R$ 50 a R$ 100 dependendo da alteração.',
-    waMsg: 'Olá! Quero contratar a Landing Page de Pagamento Único agora. Já estou ciente de que alterações pós-entrega custam entre R$ 50 a R$ 100 e quero iniciar o projeto!',
-    cta: 'Contratar Landing Page',
     featured: false,
-    detailedInfo: {
-      prazo: 'Entrega em 5 a 7 dias úteis',
-      destaque: 'Pagamento único sem mensalidade. Alterações futuras pós-entrega variam de R$ 50 a R$ 100 por ajuste.',
-      sections: [
-        {
-          title: 'Regra de Alterações Pós-Entrega:',
-          items: [
-            'Pagamento 100% único: você não paga nenhuma mensalidade fixa',
-            'Após a entrega oficial e aprovação do projeto, qualquer alteração futura será cobrada à parte entre R$ 50 a R$ 100 (dependendo da complexidade do ajuste)',
-            'Pequenos ajustes (trocar telefone, atualizar preços, trocar foto): a partir de R$ 50',
-            'Ajustes maiores ou novas seções: até R$ 100',
-            'Se seu negócio precisa de alterações constantes todo mês, recomendamos o plano Site de Vendas (onde suporte e alterações mensais já estão inclusos)',
-          ],
-        },
-        {
-          title: 'O que está incluso:',
-          items: [
-            'Copywriting persuasivo focado em fechar vendas',
-            'Design exclusivo e profissional (sem modelos genéricos)',
-            'Botão flutuante inteligente de WhatsApp integrado',
-            'Domínio personalizado configurado (.com.br ou .com)',
-            'Hospedagem em nuvem de alta velocidade e segura inclusa',
-            'Configuração de tags para Google e Meta Ads',
-          ],
-        },
-        {
-          title: 'Como funciona:',
-          items: [
-            '1. Você clica no botão e fechamos os detalhes no WhatsApp',
-            '2. Você nos passa as informações do seu negócio',
-            '3. Desenvolvemos o layout e você aprova antes de publicar',
-            '4. Seu site é publicado e já fica pronto para vender',
-          ],
-        },
-      ],
-    },
+    waMsg: 'Olá! Quero contratar o plano Landing Page de R$ 297 (valor único) para o meu negócio.',
+    ctaText: 'Escolher Landing Page'
   },
   {
-    id: 'site',
-    icon: <LayoutDashboard size={22} strokeWidth={1.8} />,
-    eyebrow: 'Setup + Mensalidade',
-    name: 'Site de Vendas',
-    price: 'R$ 297',
-    priceSub: 'Setup inicial + mensalidade com suporte e manutenção inclusos.',
+    id: 'site-institucional',
+    name: 'Site Institucional',
+    tagline: 'Para negócios em geral',
+    badge: 'Mais escolhido',
+    price: 'R$ 1.400',
+    period: 'Valor único',
     features: [
-      'Site completo com painel administrativo',
-      'Catálogo interativo de produtos ou serviços',
-      'Pedidos e orçamentos direto no WhatsApp',
-      'Painel intuitivo para você atualizar conteúdo',
-      'Hospedagem rápida e suporte mensal contínuo',
-      'Backups automáticos e atualizações inclusas',
+      'Todas as funcionalidades do plano anterior',
+      'Páginas adicionais',
+      'Catálogo de produtos',
+      'Integração com WhatsApp'
     ],
-    note: 'A mensalidade garante hospedagem, sistema, suporte e alterações.',
-    waMsg: 'Olá! Quero contratar o Site de Vendas com Painel Administrativo (R$ 297 + mensalidade) agora. Já estou decidido e quero dar início hoje!',
-    cta: 'Contratar Site de Vendas',
     featured: true,
-    detailedInfo: {
-      prazo: 'Entrega em 7 a 10 dias úteis',
-      destaque: 'Tenha um painel para alterar fotos, preços e produtos a qualquer hora.',
-      sections: [
-        {
-          title: 'O que está incluso no Setup e Mensalidade:',
-          items: [
-            'Criação completa do site com design premium sob medida',
-            'Painel administrativo fácil de mexer pelo celular ou computador',
-            'Catálogo com fotos, descrições, preços e botão de compra',
-            'Hospedagem em servidor de alta performance inclusa na mensalidade',
-            'Suporte prioritário via WhatsApp para tirar dúvidas a qualquer momento',
-            'Pequenas alterações e manutenções periódicas inclusas',
-            'Segurança reforçada com certificado SSL e backups regulares',
-          ],
-        },
-        {
-          title: 'Vantagens para o seu negócio:',
-          items: [
-            'Você não precisa pagar desenvolvedor toda vez que quiser mudar algo',
-            'Seu cliente escolhe o que quer no site e já chega no seu WhatsApp pronto para pagar',
-            'Profissionalismo total que passa confiança imediata aos clientes',
-          ],
-        },
-      ],
-    },
+    waMsg: 'Olá! Quero contratar o plano Site Institucional de R$ 1.400 (valor único) para a minha empresa.',
+    ctaText: 'Escolher Site Institucional'
   },
+  {
+    id: 'manutencao',
+    name: 'Manutenção',
+    tagline: 'Para manter seu site sempre online',
+    price: 'R$ 140',
+    period: 'Por mês',
+    features: [
+      'Atualizações e segurança',
+      'Suporte e ajustes',
+      'Hospedagem e domínio',
+      'Tudo funcionando sem preocupações'
+    ],
+    featured: false,
+    waMsg: 'Olá! Quero saber mais sobre o plano de Manutenção de R$ 140/mês para manter meu site seguro.',
+    ctaText: 'Escolher Manutenção'
+  }
 ];
 
-export const Plans: React.FC = () => {
+export const Plans: React.FC<PlansProps> = ({ onOpenQuoteModal }) => {
   const { settings } = useSite();
-  const [expandedPlan, setExpandedPlan] = useState<Record<string, boolean>>({});
-  const refs = useRef<(HTMLElement | null)[]>([]);
-
   const wa = settings?.contact?.whatsapp?.replace(/\D/g, '') || '5581973119512';
 
-  const toggleDetails = (planId: string) => {
-    setExpandedPlan(prev => ({
-      ...prev,
-      [planId]: !prev[planId],
-    }));
-  };
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-      }),
-      { threshold: 0.1 }
-    );
-    refs.current.forEach(el => { if (el) obs.observe(el); });
-    return () => obs.disconnect();
-  }, []);
+  const getWaLink = (msg: string) => `https://wa.me/${wa}?text=${encodeURIComponent(msg)}`;
 
   return (
-    <section id="plans" className="plans-section" aria-label="Planos">
-      <div className="container">
-
-        {/* Section header */}
-        <div className="plans-header reveal" ref={el => { refs.current[0] = el; }}>
-          <div className="plans-eyebrow">
-            <span className="plans-eyebrow-dot" />
-            Planos e Valores
-          </div>
+    <section id="plans" className="plans-section" aria-label="Investimento e Planos">
+      <div className="container plans-container">
+        {/* ── Left Column: Intro ── */}
+        <div className="plans-intro">
+          <span className="plans-kicker">INVESTIMENTO</span>
           <h2 className="plans-title">
-            Escolha o<br />
-            <span className="plans-title-grad">plano certo</span> para você
+            Planos que cabem<br />
+            no seu momento.
           </h2>
           <p className="plans-subtitle">
-            Sem burocracia ou termos difíceis. Escolha o seu plano e inicie seu projeto direto pelo WhatsApp.
+            Escolha a opção ideal para o seu projeto e comece hoje mesmo a ter um site profissional.
           </p>
+
+          <button
+            type="button"
+            className="btn-plans-quote"
+            onClick={onOpenQuoteModal}
+            id="plans-cta-quote"
+          >
+            <span>Solicitar Orçamento</span>
+            <ArrowRight size={16} />
+          </button>
         </div>
 
-        {/* Cards */}
-        <div className="plans-grid">
-          {PLANS.map((plan, i) => {
-            const isExpanded = !!expandedPlan[plan.id];
-
-            return (
-              <article
-                key={plan.id}
-                className={`plan-card reveal ${plan.featured ? 'plan-card--feat' : ''}`}
-                ref={el => { refs.current[i + 1] = el; }}
-                style={{ transitionDelay: `${i * 0.14}s` }}
-              >
-                {plan.featured && (
-                  <div className="plan-feat-badge">Mais Completo</div>
-                )}
-
-                {/* Top */}
-                <div className="plan-top">
-                  <div className="plan-icon">{plan.icon}</div>
-                  <span className="plan-eyebrow">{plan.eyebrow}</span>
+        {/* ── Right Column: 3 Pricing Cards ── */}
+        <div className="plans-cards-grid">
+          {AGENCY_PLANS.map((plan) => (
+            <div
+              key={plan.id}
+              className={`plan-agency-card ${plan.featured ? 'plan-featured' : ''}`}
+            >
+              {plan.badge && (
+                <div className="plan-badge-pill">
+                  <span>{plan.badge}</span>
                 </div>
+              )}
 
-                <h3 className="plan-name">{plan.name}</h3>
+              <div className="plan-agency-header">
+                <h3 className="plan-agency-name">{plan.name}</h3>
+                <p className="plan-agency-tagline">{plan.tagline}</p>
 
-                {/* Price */}
-                <div className="plan-price-block">
-                  <span className="plan-price">{plan.price}</span>
-                  <span className="plan-price-sub">{plan.priceSub}</span>
+                <div className="plan-agency-price-block">
+                  <span className="plan-agency-price">{plan.price}</span>
+                  <span className="plan-agency-period">{plan.period}</span>
                 </div>
+              </div>
 
-                <div className="plan-sep" />
+              <ul className="plan-features-list">
+                {plan.features.map((feat, idx) => (
+                  <li key={idx} className="plan-feature-row">
+                    <CheckCircle2 size={16} className="plan-feature-check" />
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
 
-                {/* Features */}
-                <ul className="plan-features">
-                  {plan.features.map((f, j) => (
-                    <li key={j}>
-                      <CheckCircle2 size={15} className="plan-check" />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <p className="plan-note">{plan.note}</p>
-
-                {/* Expand / More Info Button */}
-                <button
-                  type="button"
-                  className={`plan-more-info-btn ${isExpanded ? 'active' : ''}`}
-                  onClick={() => toggleDetails(plan.id)}
-                  aria-expanded={isExpanded}
-                >
-                  <Sparkles size={14} />
-                  <span>{isExpanded ? 'Ocultar detalhes' : 'Mais informações e o que inclui'}</span>
-                  <ChevronDown size={15} className={`chevron-icon ${isExpanded ? 'rotated' : ''}`} />
-                </button>
-
-                {/* Detailed Information Drawer */}
-                {isExpanded && (
-                  <div className="plan-details-box">
-                    <div className="plan-details-meta">
-                      <div className="plan-meta-pill">
-                        <Clock size={13} />
-                        <span>{plan.detailedInfo.prazo}</span>
-                      </div>
-                      <div className="plan-meta-pill">
-                        <ShieldCheck size={13} />
-                        <span>Garantia & Suporte</span>
-                      </div>
-                    </div>
-
-                    <p className="plan-highlight-text">{plan.detailedInfo.destaque}</p>
-
-                    {plan.detailedInfo.sections.map((sec, sIdx) => (
-                      <div key={sIdx} className="plan-detail-group">
-                        <h4 className="plan-detail-group-title">{sec.title}</h4>
-                        <ul className="plan-detail-group-list">
-                          {sec.items.map((item, itmIdx) => (
-                            <li key={itmIdx}>
-                              <span className="detail-dot" />
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Direct CTA */}
+              <div className="plan-agency-action">
                 <a
-                  href={`https://wa.me/${wa}?text=${encodeURIComponent(plan.waMsg)}`}
+                  href={getWaLink(plan.waMsg)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`plan-cta ${plan.featured ? 'plan-cta--feat' : 'plan-cta--ghost'}`}
-                  id={`plan-cta-${plan.id}`}
+                  className={`btn-plan-action ${plan.featured ? 'btn-plan-featured' : ''}`}
                 >
-                  <span>{plan.cta}</span>
-                  <ArrowRight size={17} />
+                  <MessageSquare size={16} />
+                  <span>{plan.ctaText}</span>
                 </a>
-              </article>
-            );
-          })}
+              </div>
+            </div>
+          ))}
         </div>
-
-        {/* Bottom note */}
-        <p className="plans-note reveal" ref={el => { refs.current[3] = el; }}>
-          Dúvida rápida antes de fechar?{' '}
-          <a
-            href={`https://wa.me/${wa}?text=${encodeURIComponent('Olá! Tenho uma dúvida sobre os planos antes de contratar.')}`}
-            target="_blank" rel="noopener noreferrer"
-          >
-            Tire suas dúvidas no WhatsApp →
-          </a>
-        </p>
-
       </div>
     </section>
   );

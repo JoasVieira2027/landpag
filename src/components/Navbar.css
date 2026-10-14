@@ -1,90 +1,111 @@
 /* ==============================================================================
-   NAVBAR - Light Navy Edition
+   NAVBAR - Light Navy Agency Edition
    ============================================================================== */
 
 .navbar {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-subtle);
   transition: all var(--t-fast);
-  box-shadow: 0 1px 0 rgba(15,23,41,0.06);
+  box-shadow: 0 1px 2px rgba(15, 23, 41, 0.04);
 }
 
 .navbar-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 4.25rem;
+  height: 4.5rem;
 }
 
 /* ── Brand ── */
 .navbar-brand {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  font-family: var(--font-heading);
-  font-weight: 800;
-  font-size: 1.25rem;
-  color: var(--text-primary);
-  letter-spacing: -0.03em;
+  gap: 0.75rem;
+  text-decoration: none;
   transition: opacity var(--t-fast);
 }
 
 .navbar-brand:hover {
-  opacity: 0.8;
+  opacity: 0.88;
 }
 
-.navbar-logo-icon {
-  width: 2rem;
-  height: 2rem;
+.navbar-logo-symbol {
+  width: 2.25rem;
+  height: 2.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--accent-dark);
-  color: #ffffff;
-  border-radius: var(--r-sm);
-  font-size: 0.78rem;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  box-shadow: 0 2px 8px rgba(30,58,138,0.3);
+  flex-shrink: 0;
+}
+
+.navbar-brand-text-col {
+  display: flex;
+  flex-direction: column;
 }
 
 .navbar-logo-text {
-  color: var(--text-primary);
-  background: none;
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: unset;
-  background-clip: unset;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--navy);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.navbar-logo-tagline {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0.01em;
+  margin-top: 1px;
 }
 
 /* ── Links ── */
 .navbar-links {
   display: none;
   align-items: center;
-  gap: 2rem;
+  gap: 2.25rem;
 }
 
-@media (min-width: 860px) {
+@media (min-width: 900px) {
   .navbar-links {
     display: flex;
   }
 }
 
 .navbar-link {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 500;
   color: var(--text-secondary);
   transition: color var(--t-fast);
   position: relative;
   padding: 0.5rem 0;
+  text-decoration: none;
 }
 
 .navbar-link:hover {
-  color: var(--text-primary);
+  color: var(--navy);
+}
+
+.navbar-link.active {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.navbar-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--blue-primary);
+  border-radius: 2px;
 }
 
 .navbar-link::after {
@@ -94,7 +115,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: var(--accent-dark);
+  background: var(--blue-primary);
   border-radius: 2px;
   transition: width var(--t-fast);
 }
@@ -110,14 +131,30 @@
   gap: 0.75rem;
 }
 
-.btn-nav-cta {
+.btn-nav-quote {
   display: none;
-  padding: 0.6rem 1.15rem;
-  font-size: 0.875rem;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--navy);
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.65rem 1.35rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  box-shadow: 0 4px 14px rgba(11, 25, 44, 0.18);
+}
+
+.btn-nav-quote:hover {
+  background-color: var(--navy-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(11, 25, 44, 0.25);
 }
 
 @media (min-width: 640px) {
-  .btn-nav-cta {
+  .btn-nav-quote {
     display: inline-flex;
   }
 }
@@ -130,18 +167,18 @@
   height: 2.5rem;
   border-radius: var(--r-sm);
   border: 1.5px solid var(--border-medium);
-  color: var(--text-primary);
-  background-color: var(--bg-card);
+  color: var(--navy);
+  background-color: #ffffff;
+  cursor: pointer;
   transition: background var(--t-fast), border-color var(--t-fast);
 }
 
 .mobile-menu-btn:hover {
-  background-color: var(--bg-card-hover);
-  border-color: var(--accent-light);
-  color: var(--accent-dark);
+  background-color: var(--bg-surface);
+  border-color: var(--blue-primary);
 }
 
-@media (min-width: 860px) {
+@media (min-width: 900px) {
   .mobile-menu-btn {
     display: none !important;
   }
@@ -150,18 +187,18 @@
 /* ── Mobile Drawer ── */
 .mobile-nav-drawer {
   position: fixed;
-  top: 4.25rem;
+  top: 4.5rem;
   left: 0;
   right: 0;
   background-color: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-subtle);
-  box-shadow: 0 20px 40px rgba(15,23,41,0.1);
+  box-shadow: 0 20px 40px rgba(11, 25, 44, 0.1);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
   animation: slideDown 0.22s ease-out forwards;
 }
 
@@ -177,14 +214,49 @@
 }
 
 .mobile-nav-link {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: var(--text-primary);
-  padding: 0.75rem 0;
+  color: var(--navy);
+  padding: 0.65rem 0;
   border-bottom: 1px solid var(--border-subtle);
+  text-decoration: none;
   transition: color var(--t-fast);
 }
 
 .mobile-nav-link:hover {
-  color: var(--accent-dark);
+  color: var(--blue-primary);
+}
+
+.mobile-nav-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.btn-full {
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-nav-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-medium);
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all var(--t-fast);
+}
+
+.btn-nav-whatsapp:hover {
+  background-color: #ffffff;
+  border-color: var(--blue-primary);
+  color: var(--blue-primary);
 }

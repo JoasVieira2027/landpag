@@ -1,88 +1,69 @@
 import React from 'react';
 import { useSite } from '../context/SiteContext';
-import { MessageSquare, ArrowUpRight } from 'lucide-react';
 import './Footer.css';
 
 export const Footer: React.FC = () => {
   const { settings, setIsAdminOpen } = useSite();
 
-  const wa = settings?.contact?.whatsapp?.replace(/\D/g, '') || '5581973119512';
-  const waUrl = `https://wa.me/${wa}?text=${encodeURIComponent('Olá! Vim pelo site da FluxoWeb e quero fechar um projeto de alta conversão.')}`;
+  const handleAdminTrigger = () => {
+    const now = Date.now();
+    const lastClicks = (window as any).__footerClicks || [];
+    const recentClicks = [...lastClicks.filter((t: number) => now - t < 1200), now];
+    (window as any).__footerClicks = recentClicks;
+    if (recentClicks.length >= 3) {
+      (window as any).__footerClicks = [];
+      setIsAdminOpen(true);
+    }
+  };
 
   return (
-    <footer className="footer">
-      <div className="container">
-        <div className="footer-top">
-          {/* Brand Info */}
-          <div className="footer-brand">
-            <div className="footer-brand-title">
-              <span className="navbar-logo-icon">FW</span>
-              <span className="navbar-logo-text">{settings.brandName}</span>
-            </div>
-            <p className="footer-tagline">
-              Criação de Landing Pages e Sites de Vendas de alta conversão. Foco em velocidade, estética premium e vendas no WhatsApp.
-            </p>
-          </div>
-
-          {/* Quick Links */}
-          <div className="footer-links-group">
-            <h4 className="footer-col-title">Navegação</h4>
-            <ul className="footer-links-list">
-              <li><a href="#hero" className="footer-link">Início</a></li>
-              <li><a href="#plans" className="footer-link">Planos e Valores</a></li>
-              <li><a href="#cta" className="footer-link">Começar Projeto</a></li>
-            </ul>
-          </div>
-
-          {/* Direct Contact */}
-          <div className="footer-links-group">
-            <h4 className="footer-col-title">Contato Direto</h4>
-            <ul className="footer-links-list">
-              <li>
-                <a
-                  href={waUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="footer-link footer-link-wa"
-                >
-                  <MessageSquare size={15} />
-                  <span>{settings.contact.whatsapp || 'WhatsApp'}</span>
-                  <ArrowUpRight size={14} />
-                </a>
-              </li>
-              {settings.contact.email && (
-                <li>
-                  <a href={`mailto:${settings.contact.email}`} className="footer-link">
-                    {settings.contact.email}
-                  </a>
-                </li>
-              )}
-            </ul>
-          </div>
+    <footer className="footer-agency">
+      <div className="container footer-agency-container">
+        {/* Left: Copyright */}
+        <div className="footer-agency-copy">
+          <span onClick={handleAdminTrigger} style={{ cursor: 'default' }}>
+            © {new Date().getFullYear()} Fluxo Web. Todos os direitos reservados.
+          </span>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="footer-bottom-bar">
-          <span
-            className="footer-copy"
-            onClick={() => {
-              const now = Date.now();
-              const lastClicks = (window as any).__footerClicks || [];
-              const recentClicks = [...lastClicks.filter((t: number) => now - t < 1200), now];
-              (window as any).__footerClicks = recentClicks;
-              if (recentClicks.length >= 3) {
-                (window as any).__footerClicks = [];
-                setIsAdminOpen(true);
-              }
-            }}
-            title=""
-          >
-            © {new Date().getFullYear()} {settings.brandName}. Todos os direitos reservados.
-          </span>
+        {/* Center: Navigation Links */}
+        <nav className="footer-agency-nav" aria-label="Navegação do rodapé">
+          <a href="#hero" className="footer-nav-item">Início</a>
+          <a href="#services" className="footer-nav-item">Serviços</a>
+          <a href="#portfolio" className="footer-nav-item">Portfólio</a>
+          <a href="#plans" className="footer-nav-item">Planos</a>
+          <a href="#cta" className="footer-nav-item">Contato</a>
+        </nav>
 
-          <div className="footer-badge-tag">
-            <span>Desenvolvido com Alta Performance</span>
-          </div>
+        {/* Right: Social Icons */}
+        <div className="footer-agency-socials">
+          <a
+            href={settings?.contact?.instagram || 'https://instagram.com/fluxoweb'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-social-btn"
+            aria-label="Instagram"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+
+          <a
+            href={settings?.contact?.linkedin || 'https://linkedin.com'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="footer-social-btn"
+            aria-label="LinkedIn"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
         </div>
       </div>
     </footer>
