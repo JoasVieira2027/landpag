@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ArrowRight,
   MessageSquare,
@@ -13,7 +13,47 @@ interface HeroProps {
   onOpenQuoteModal: () => void;
 }
 
+interface RealProjectTab {
+  id: string;
+  name: string;
+  badge: string;
+  url: string;
+  image: string;
+  liveUrl: string;
+}
+
+const REAL_PROJECT_TABS: RealProjectTab[] = [
+  {
+    id: 'acai',
+    name: 'Açaí da Daiane',
+    badge: 'Cardápio & Pedidos',
+    url: 'acaidadaiane.vercel.app',
+    image: '/projects/site-acai-real.png',
+    liveUrl: 'https://acaidadaiane.vercel.app/',
+  },
+  {
+    id: 'roupa',
+    name: 'Fit Vibe Activewear',
+    badge: 'Loja de Roupas',
+    url: 'sitederoupa-6efo.vercel.app',
+    image: '/projects/site-roupa-real.png',
+    liveUrl: 'https://sitederoupa-6efo.vercel.app/',
+  },
+  {
+    id: 'admin',
+    name: 'Painel Admin',
+    badge: 'Gestão da Loja',
+    url: 'acaidadaiane.vercel.app/admin',
+    image: '/projects/painel-admin-real.png',
+    liveUrl: 'https://acaidadaiane.vercel.app/',
+  },
+];
+
 export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
+  const [activeTab, setActiveTab] = useState<string>('acai');
+
+  const currentProject =
+    REAL_PROJECT_TABS.find((p) => p.id === activeTab) || REAL_PROJECT_TABS[0];
 
   return (
     <section id="hero" className="hero-section" aria-label="Início">
@@ -89,30 +129,76 @@ export const Hero: React.FC<HeroProps> = ({ onOpenQuoteModal }) => {
           </div>
         </div>
 
-        {/* ── Right Column: Device Showcase Graphic ── */}
+        {/* ── Right Column: Interactive Real Projects Showcase ── */}
         <div className="hero-visual">
-          <div className="hero-mockup-wrapper">
-            <img
-              src="/showcase/hero-devices.jpg"
-              alt="Sites profissionais em múltiplos dispositivos criados pela Fluxo Web"
-              className="hero-mockup-image"
-              loading="eager"
-            />
+          <div className="hero-showcase-card">
+            {/* Project Tabs Selector */}
+            <div className="hero-tabs-selector" role="tablist" aria-label="Projetos Reais">
+              {REAL_PROJECT_TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === tab.id}
+                  className={`hero-tab-btn ${activeTab === tab.id ? 'active' : ''}`}
+                  onClick={() => setActiveTab(tab.id)}
+                >
+                  <span className="hero-tab-name">{tab.name}</span>
+                  <span className="hero-tab-badge">{tab.badge}</span>
+                </button>
+              ))}
+            </div>
 
-            {/* Floating Live Badge */}
-            <div className="hero-floating-badge">
-              <span className="floating-badge-dot" />
-              <span className="floating-badge-label">Projetos reais em produção</span>
-              <a
-                href="https://acaidadaiane.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="floating-badge-link"
-                title="Testar site real ao vivo"
-              >
-                <span>Ver online</span>
-                <ExternalLink size={12} />
-              </a>
+            {/* Real Browser Frame */}
+            <div className="hero-browser-window">
+              <div className="hero-browser-header">
+                <div className="browser-dots">
+                  <span /><span /><span />
+                </div>
+                <div className="hero-browser-address-pill">
+                  <span className="address-lock">🔒</span>
+                  <span className="address-text">{currentProject.url}</span>
+                </div>
+                <a
+                  href={currentProject.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hero-browser-external-link"
+                  title="Abrir site real no navegador"
+                >
+                  <span>Abrir no ar</span>
+                  <ExternalLink size={12} />
+                </a>
+              </div>
+
+              {/* Real Project Screenshot Display */}
+              <div className="hero-screenshot-viewport">
+                <img
+                  key={currentProject.id}
+                  src={currentProject.image}
+                  alt={`Screenshot real do projeto ${currentProject.name}`}
+                  className="hero-real-screenshot"
+                  loading="eager"
+                />
+              </div>
+
+              {/* Bottom Real Case Bar */}
+              <div className="hero-browser-footer">
+                <div className="hero-footer-status">
+                  <span className="status-live-dot" />
+                  <strong>Caso Real:</strong>
+                  <span>{currentProject.name}</span>
+                </div>
+                <a
+                  href={currentProject.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hero-footer-cta-link"
+                >
+                  <span>Ver site funcionando</span>
+                  <ArrowRight size={13} />
+                </a>
+              </div>
             </div>
           </div>
         </div>

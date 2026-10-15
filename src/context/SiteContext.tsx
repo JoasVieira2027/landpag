@@ -76,7 +76,7 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return saved === 'dark' ? 'dark' : 'light';
   });
 
-  const CURRENT_VERSION = 'v9_fluxoweb';
+  const CURRENT_VERSION = 'v11_fluxoweb_real_images';
 
   const [settings, setSettings] = useState<SiteSettings>(() => {
     const version = localStorage.getItem('webjoas_data_version');
@@ -111,7 +111,13 @@ export const SiteProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const version = localStorage.getItem('webjoas_data_version');
     if (version !== CURRENT_VERSION) return defaultProjects;
     const saved = localStorage.getItem(STORAGE_KEYS.PROJECTS);
-    return saved ? JSON.parse(saved) : defaultProjects;
+    if (!saved) return defaultProjects;
+    try {
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) && parsed.length >= 3 ? parsed : defaultProjects;
+    } catch {
+      return defaultProjects;
+    }
   });
 
   const [processSteps, setProcessSteps] = useState<ProcessStep[]>(() => {

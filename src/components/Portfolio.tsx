@@ -11,7 +11,6 @@ interface PortfolioProps {
 export const Portfolio: React.FC<PortfolioProps> = ({ onOpenQuoteModal }) => {
   const { t, projects } = useSite();
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
-  const [iframeLoaded, setIframeLoaded] = useState(false);
 
   const getTagBadge = (proj: ProjectItem) => {
     if (proj.id === 'fit-vibe-activewear') return 'Loja de Roupas';
@@ -31,12 +30,10 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenQuoteModal }) => {
 
   const handleOpenModal = (project: ProjectItem) => {
     setSelectedProject(project);
-    setIframeLoaded(false);
   };
 
   const handleCloseModal = () => {
     setSelectedProject(null);
-    setIframeLoaded(false);
   };
 
   return (
@@ -171,56 +168,39 @@ export const Portfolio: React.FC<PortfolioProps> = ({ onOpenQuoteModal }) => {
             </div>
 
             <div className="portfolio-modal-body">
-              {selectedProject.liveUrl && selectedProject.id !== 'painel-admin-acai' ? (
-                <div className="modal-live-preview-wrapper">
-                  <div className="modal-browser-chrome">
-                    <div className="modal-browser-bar">
-                      <div className="browser-dots">
-                        <span /><span /><span />
-                      </div>
-                      <div className="modal-browser-address">
-                        <Globe size={13} />
-                        <span>{selectedProject.liveUrl}</span>
-                      </div>
+              <div className="modal-live-preview-wrapper">
+                <div className="modal-browser-chrome">
+                  <div className="modal-browser-bar">
+                    <div className="browser-dots">
+                      <span /><span /><span />
                     </div>
-                    <div className="modal-iframe-wrapper">
-                      {!iframeLoaded && (
-                        <div className="modal-iframe-loading">
-                          <div className="iframe-spinner" />
-                          <span>Carregando visualização ao vivo...</span>
-                        </div>
-                      )}
-                      <iframe
-                        src={selectedProject.liveUrl}
-                        title={t(selectedProject.title)}
-                        className={`modal-site-iframe ${iframeLoaded ? 'iframe-visible' : ''}`}
-                        onLoad={() => setIframeLoaded(true)}
-                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                        loading="lazy"
-                      />
+                    <div className="modal-browser-address">
+                      <Globe size={13} />
+                      <span>{getDisplayUrl(selectedProject)}</span>
                     </div>
+                    {selectedProject.liveUrl && (
+                      <a
+                        href={selectedProject.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="modal-browser-link-pill"
+                        title="Visitar site oficial"
+                      >
+                        <span>Visitar site</span>
+                        <ExternalLink size={12} />
+                      </a>
+                    )}
                   </div>
-                </div>
-              ) : (
-                <div className="modal-live-preview-wrapper">
-                  <div className="modal-browser-chrome">
-                    <div className="modal-browser-bar">
-                      <div className="browser-dots">
-                        <span /><span /><span />
-                      </div>
-                      <div className="modal-browser-address">
-                        <Globe size={13} />
-                        <span>{getDisplayUrl(selectedProject)}</span>
-                      </div>
-                    </div>
+                  <div className="modal-screenshot-wrap">
                     <img
                       src={selectedProject.image}
                       alt={t(selectedProject.title)}
                       className="modal-project-img"
+                      loading="eager"
                     />
                   </div>
                 </div>
-              )}
+              </div>
 
               <p className="modal-project-desc">{t(selectedProject.shortDesc)}</p>
 
